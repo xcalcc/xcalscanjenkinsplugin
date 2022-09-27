@@ -1,0 +1,140 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form">
+    <script>
+        Behaviour.addLoadEvent( function() {
+            if(document.getElementById('bToolTxt').value == null || document.getElementById('bToolTxt').value == '')
+            {
+                document.getElementById('buildToolPath').style='display: none;'
+            }
+        });
+    </script>
+    <!-- Xcalscan server  -->
+    <j:set var="servers" value="${descriptor.getXcalscanServers()}"/>
+    <j:if test="${empty(servers)}">
+        <!-- no Xcalscan is configured, so warn the user now -->
+        <f:entry title="${%XcalscanServers}">
+            <div class="error">${%XcalscanServers.error(rootURL)}</div>
+        </f:entry>
+    </j:if>
+    <j:if test="${servers.size() gt 0}">
+        <!-- choice not necessary if there's no choice -->
+        <f:entry title="${%XcalscanServers}: " field="serverName">
+            <select class="setting-input" name="serverName"  >
+                <j:forEach var="server" items="${servers}">
+                    <f:option value="${server.name}" selected="${server.name==instance.serverName}">${server.name}</f:option>
+                </j:forEach>
+            </select>
+        </f:entry>
+    </j:if>
+    <f:entry field="credential" title="${%Credential}">
+        <f:select />
+    </f:entry>
+    <f:validateButton title="${%TestConnection}" progress="${%Testing}..." method="testConnection"
+                      with="serverName,credential"/>
+
+    <f:entry title="${%step.build.label.clientSetting.clientPath}" field="clientPath">
+        <f:textbox/>
+    </f:entry>
+    <!--<f:entry title="${%step.build.label.scanSetting.language}" field="language">
+        <f:textbox/>
+    </f:entry>-->
+
+    <f:entry title="${%step.build.label.scanSetting.language}" field="language">
+        <f:entry>
+            <f:radio name="language" title="C/C++" value="c" checked="${instance.language == 'c'}" defaultChecked="true"
+                onclick="javascript:
+                        document.getElementById('buildToolPath').style='display: none;';
+                        document.getElementById('buildTool').innerHTML='&lt;option value=&quot;make&quot; &gt;make&lt;/option&gt;&lt;option value=&quot;aos make&quot; &gt;aos make&lt;/option&gt;&lt;option value=&quot;cmake&quot; &gt;cmake&lt;/option&gt;&lt;option value=&quot;scons&quot; &gt;scons&lt;/option&gt;&lt;option value=&quot;ninja&quot; &gt;ninja&lt;/option&gt;&lt;option value=&quot;catkin_make&quot; &gt;catkin_make&lt;/option&gt;&lt;option value=&quot;bazel&quot; &gt;bazel&lt;/option&gt;&lt;option value=&quot;UV4.exe&quot; &gt;UV4.exe&lt;/option&gt;&lt;option value=&quot;iar_build.exe&quot; &gt;iar_build.exe&lt;/option&gt;&lt;option value=&quot;Other&quot; &gt;Other&lt;/option&gt;';
+                        document.getElementById('buildTool').value ='make';
+                        document.getElementById('bToolTxt').value ='';
+            "/>
+        </f:entry>
+        <f:entry>
+            <f:radio name="language" title="Java" value="java" checked="${instance.language == 'java'}"
+                onclick="javascript:
+                        document.getElementById('buildToolPath').style='display: none;';
+                        document.getElementById('buildTool').innerHTML='&lt;option value=&quot;mvn&quot; &gt;mvn&lt;/option&gt;&lt;option value=&quot;gradle&quot; &gt;gradle&lt;/option&gt;&lt;option value=&quot;mvnw&quot; &gt;mvnw&lt;/option&gt;&lt;option value=&quot;gradlew&quot; &gt;gradlew&lt;/option&gt;';
+                        document.getElementById('buildTool').value ='mvn';
+                        document.getElementById('bToolTxt').value ='';
+            "/>
+        </f:entry>
+    </f:entry>
+
+    <f:entry title="${%step.build.title.scanSetting}">
+        <div>
+            <f:entry title="${%step.build.label.scanSetting.projectId}" field="projectId">
+                <f:textbox disabled="true" id="pidTxt"/>
+                <div style="float:right;padding-top: 1.2em;">
+                    <input type="button" value="Clear Project Id" onclick="javascript:document.getElementById('pidTxt').value=''"></input>
+                </div>
+            </f:entry>
+
+            <f:advanced>
+                <!-- <f:entry title="${%step.build.label.scanSetting.projectConfFilePath}" field="projectConfFilePath">
+                    <f:textbox/>
+                </f:entry> -->
+                <f:entry title="${%step.build.label.scanSetting.projectName}" field="projectName">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.projectPath}" field="projectPath">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.buildPath}" field="buildPath">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.gitRepoPath}" field="gitRepoPath">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.gitRepoName}" field="gitRepoName">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.scanMemLimit}" field="scanMemLimit">
+                    <f:textbox/>
+                </f:entry>
+                <!--<f:entry title="${%step.build.label.scanSetting.buildCommand}" field="buildCommand">
+                    <f:textbox/>
+                </f:entry>-->
+                <f:entry field="buildTool" title="${%step.build.label.scanSetting.buildTool}">
+                    <f:select name="buildTool" id="buildTool" class="setting-input"
+                        onchange="javascript:if (document.getElementById('buildTool').value == 'UV4.exe' || document.getElementById('buildTool').value == 'iar_build.exe' || document.getElementById('buildTool').value == 'Other' || document.getElementById('buildTool').value == 'mvnw' || document.getElementById('buildTool').value == 'gradlew') {document.getElementById('buildToolPath').style='display: block;'} else{document.getElementById('bToolTxt').value ='';document.getElementById('buildToolPath').style='display: none;'}">
+                            <!--
+                            <option value="make" >make</option>
+                            <option value="aos make" >aos make</option>
+                            <option value="cmake" >cmake</option>
+                            <option value="scons" >scons</option>
+                            <option value="ninja" >ninja</option>
+                            <option value="catkin_make" >catkin_make</option>
+                            <option value="bazel" >bazel</option>
+                            <option value="UV4.exe" >UV4.exe</option>
+                            <option value="iar_build.exe" >iar_build.exe</option>
+                            <option value="Other" >Other</option>
+
+                            <option value="mvn" >mvn</option>
+                            <option value="gradle" >gradle</option>
+                            <option value="mvnw" >mvnw</option>
+                            <option value="gradlew" >gradlew</option>
+                            -->
+                    </f:select>
+                </f:entry>
+
+                <div id="buildToolPath">
+                    <f:entry title="${%step.build.label.scanSetting.buildToolPath}" field="buildToolPath">
+                        <f:textbox id="bToolTxt"/>
+                    </f:entry>
+                </div>
+                <f:entry title="${%step.build.label.scanSetting.buildOption}" field="buildOption">
+                    <f:textbox/>
+                </f:entry>
+                <f:entry title="${%step.build.label.scanSetting.prebuildCommand}" field="prebuildCommand">
+                    <f:textbox/>
+                </f:entry>
+                <!-- <f:entry title="${%PollInterval}" field="pollInterval">
+                    <f:textbox default="3"/>
+                </f:entry>  -->
+                <f:entry title="${%step.build.label.scanSetting.uploadSource}" field="uploadSource">
+                      <f:checkbox default="true"/>
+                </f:entry>
+            </f:advanced>
+        </div>
+    </f:entry>
+</j:jelly>

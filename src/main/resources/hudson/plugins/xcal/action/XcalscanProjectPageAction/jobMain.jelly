@@ -1,0 +1,164 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:i="jelly:fmt">
+    <j:set var="xcalscanAnalysisActions" value="${it.getXcalscanAnalysisActions()}"/>
+    <j:if test="${!empty(xcalscanAnalysisActions)}">
+        <link rel="stylesheet" type="text/css" href="${rootURL}/plugin/xcalscan-jenkins/css/project_info.css"/>
+        <div style="height:24px"/>
+        <svg width="54" height="24" viewBox="0 0 115 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5.46924 34.2789H5.33139L2.08796 50.7197H0L3.71779 32.5243L0 15.4539H2.52582L5.33139 30.2743H5.46924L8.41671 15.4539H10.5168L7.01393 32.5121L10.8696 50.7076H8.34373L5.46924 34.2789Z" fill="black"/>
+            <path d="M25.1042 38.9171V46.7842C25.1042 49.1724 23.9122 51 20.6161 51C17.251 51 16.0591 49.1724 16.0591 46.7842V19.3895C16.0591 16.7902 17.251 15.1737 20.6161 15.1737C23.9122 15.1737 25.1042 16.7983 25.1042 19.3895V26.4849H22.5784V19.6698C22.5784 18.2645 22.2297 17.2816 20.6161 17.2816C19.0025 17.2816 18.5889 18.2645 18.5889 19.6698V46.8533C18.5889 47.9092 18.9944 48.884 20.6161 48.884C22.2378 48.884 22.5784 47.9011 22.5784 46.9873V38.9171H25.1042Z" fill="black"/>
+            <path d="M31.6235 25.498V18.7559C31.6235 16.0144 33.5898 15.1737 36.4643 15.1737C39.1969 15.1737 41.0902 16.0144 41.0902 18.7559V50.7198H38.5685V48.9612H38.4266C37.936 50.0171 37.1657 50.9919 35.1304 50.9919C33.2371 50.9919 31.6235 50.2893 31.6235 47.8321V34.4292C31.6235 31.3384 32.9573 29.5107 37.4454 29.5107H38.5685V19.3164C38.5685 18.1954 38.0779 17.2857 36.4643 17.2857C34.6399 17.2857 34.1493 18.1995 34.1493 19.3164V25.498H31.6235ZM34.1493 47.2756C34.1493 48.2585 34.6399 48.9002 36.0427 48.9002C37.5144 48.9002 38.5685 47.2147 38.5685 45.0378V31.6349H37.8671C35.4832 31.6349 34.1493 32.1954 34.1493 34.8841V47.2756Z" fill="black"/>
+            <path d="M48.315 0H50.8368V50.7198H48.315V0Z" fill="black"/>
+            <path d="M60.0968 38.9902V46.7882C60.0968 48.1935 60.936 48.8962 62.1969 48.8962C63.3889 48.8962 64.224 48.1935 64.224 46.7882V40.7448C64.224 38.8481 64.1551 37.4956 63.3807 36.2487L59.2454 29.4335L58.4751 28.0973C57.7737 26.8342 57.5628 25.7823 57.5628 24.0927V19.089C57.5628 16.912 59.0345 15.1574 62.1199 15.1574C65.2052 15.1574 66.608 16.6318 66.608 19.2189V25.3111H64.0821V19.6251C64.0821 18.2198 63.5916 17.2369 62.1199 17.2369C60.5792 17.2369 60.0927 18.2198 60.0927 19.6251V24.446C60.0523 25.6902 60.3948 26.9167 61.0739 27.9592L62.3388 30.0549L65.6349 35.2536C66.4742 36.6549 66.758 37.9911 66.758 39.8187V46.841C66.758 49.3713 65.0754 50.9878 62.0591 50.9878C59.3954 50.9878 57.5709 49.6516 57.5709 47.2634V38.9902H60.0968Z" fill="#F5333F"/>
+            <path d="M81.8318 38.9171V46.7842C81.8318 49.1724 80.6399 51 77.3437 51C73.9787 51 72.7867 49.1724 72.7867 46.7842V19.3895C72.7867 16.7902 73.9787 15.1737 77.3437 15.1737C80.6399 15.1737 81.8318 16.7983 81.8318 19.3895V26.4849H79.306V19.6698C79.306 18.2645 78.9573 17.2816 77.3437 17.2816C75.7301 17.2816 75.3166 18.2645 75.3166 19.6698V46.8533C75.3166 47.9092 75.722 48.884 77.3437 48.884C78.9655 48.884 79.306 47.9011 79.306 46.9873V38.9171H81.8318Z" fill="#F5333F"/>
+            <path d="M88.3552 25.498V18.7559C88.3552 16.0144 90.3175 15.1737 93.192 15.1737C95.9286 15.1737 97.8179 16.0144 97.8179 18.7559V50.7198H95.2961V48.9612H95.1542C94.6637 50.0171 93.8934 50.9919 91.8581 50.9919C89.9648 50.9919 88.3552 50.2893 88.3552 47.8321V34.4292C88.3552 31.3384 89.685 29.5107 94.1731 29.5107H95.2961V19.3164C95.2961 18.1954 94.8056 17.2857 93.192 17.2857C91.3675 17.2857 90.877 18.1995 90.877 19.3164V25.498H88.3552ZM90.877 47.2756C90.877 48.2585 91.3675 48.9002 92.7703 48.9002C94.242 48.9002 95.2961 47.2147 95.2961 45.0378V31.6349H94.5948C92.2108 31.6349 90.877 32.1954 90.877 34.8841V47.2756Z" fill="#F5333F"/>
+            <path d="M105.322 15.4539H107.844V17.3507H107.982C108.387 16.4368 109.669 15.1737 111.278 15.1737C113.662 15.1737 114.996 16.1566 114.996 19.3164V50.7198H112.47V20.2302C112.47 17.9843 111.842 17.2816 110.366 17.2816C109.247 17.2816 107.844 18.5447 107.844 21.1441V50.7198H105.318L105.322 15.4539Z" fill="#F5333F"/>
+        </svg>
+        <div style="height:8px"/>
+        <style>
+            table.xcalscan-result td {
+            padding: 0px 8px;
+            vertical-align: middle;
+            }
+        </style>
+        <j:forEach var="xcalscanAnalysisAction" items="${xcalscanAnalysisActions}">
+            <j:if test="${xcalscanAnalysisAction.getStatus() != null}">
+                <j:set var="hasDsr" value="${xcalscanAnalysisAction.getBaselineScanTaskId() != null}"/>
+                <table class="xcalscan-result" width="825px" style="color:black;border-collapse: collapse;">
+                    <tr style="background-color:#B8B8B8;font-size: 14px;" height="32px">
+                        <td colspan="6" width="505px" style="text-align:left;font-weight: 900;">${xcalscanAnalysisAction.getProjectName() == null?"-":xcalscanAnalysisAction.getProjectName()}</td>
+                        <td colspan="2" style="text-align: right;font-weight: bold;" width="320px">
+                            <i:formatDate value="${xcalscanAnalysisAction.getScanTime()}" type="both" dateStyle="medium" timeStyle="short"/>
+                        </td>
+                    </tr>
+                    <tr style="background: #E6E6E6;" height="32px">
+                        <td width="90px">
+                            <span style="font-weight: bold;">Files</span>
+                        </td>
+                        <td width="70px" style="border-right: 1px solid #B8B8B8;">
+                            <span style="color: rgba(0, 0, 0, 0.6);">${xcalscanAnalysisAction.getFileCount() == null?"N/A":xcalscanAnalysisAction.getFileCount()}</span>
+                        </td>
+                        <td width="155px">
+                            <span style="font-weight: bold;">Commit ID</span>
+                        </td>
+                        <td colspan="5">
+                            <span style="color: rgba(0, 0, 0, 0.6);">${xcalscanAnalysisAction.getCommitId() == null?"N/A":xcalscanAnalysisAction.getCommitId()}</span>
+                        </td>
+                    </tr>
+                    <tr style="background: #E6E6E6;" height="32px">
+                        <td width="90px">
+                            <span style="font-weight: bold;">Lines</span>
+                        </td>
+                        <td width="70px" style="border-right: 1px solid #B8B8B8;">
+                            <span style="color: rgba(0, 0, 0, 0.6)">${xcalscanAnalysisAction.getLineCount() == null?"N/A":xcalscanAnalysisAction.getLineCount()}</span>
+                        </td>
+                        <td width="155px">
+                            <span style="font-weight: bold;">Previous Commit ID</span>
+                        </td>
+                        <td colspan="5" >
+                            <span style="color: rgba(0, 0, 0, 0.6)">
+                                ${xcalscanAnalysisAction.getBaselineCommitId() == null?"N/A":xcalscanAnalysisAction.getBaselineCommitId()}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr style="background: #F6F6F6;text-align: center;" height="32px">
+                        <td colspan="2" style="font-weight: bold;">Project Risk Level</td>
+                        <td style="font-weight: bold;">Defects Found</td>
+                        <td colspan="3" style="border-right: 1px solid #DCDCDC;"> </td>
+                        <td style="font-weight: bold;border-right: 1px solid #DCDCDC;">
+                            <span>
+                                <j:choose>
+                                    <j:when test="${hasDsr}">
+                                        <span style="display:table-cell;vertical-align: middle;text-align: center;font-size: 12px;font-weight: bold;color: black;">
+                                            New Defects
+                                        </span>
+                                    </j:when>
+                                    <j:otherwise>
+                                        New Defects
+                                    </j:otherwise>
+                                </j:choose>
+                            </span>
+                        </td>
+                        <td style="font-weight: bold;">
+                            <span>
+                                <j:choose>
+                                    <j:when test="${hasDsr}">
+                                        <span style="display:table-cell;vertical-align: middle;text-align: center;font-size: 12px;font-weight: bold;color: black;">
+                                            Fixed Defects
+                                        </span>
+                                    </j:when>
+                                    <j:otherwise>
+                                        Fixed Defects
+                                    </j:otherwise>
+                                </j:choose>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr style="background: #F6F6F6;text-align: center;" height="32px">
+                        <td colspan="2" style="font-size: 18px;font-weight: 900;">
+                            <j:choose>
+                                <j:when test="${xcalscanAnalysisAction.getRisk()=='HIGH'}">
+                                    <span style="color:#FF2929">${%risk.high}</span>
+                                </j:when>
+                                <j:when test="${xcalscanAnalysisAction.getRisk()=='MEDIUM'}">
+                                    <span style="color:#F58220">${%risk.medium}</span>
+                                </j:when>
+                                <j:when test="${xcalscanAnalysisAction.getRisk()=='LOW'}">
+                                    <span style="color:#00AEE6">${%risk.low}</span>
+                                </j:when>
+                                <j:otherwise>
+                                    <span>N/A</span>
+                                </j:otherwise>
+                            </j:choose>
+                        </td>
+                        <td style="font-size: 22px;font-weight: 900">${xcalscanAnalysisAction.getIssuesCount() == null?"0":xcalscanAnalysisAction.getIssuesCount()}</td>
+                        <td style="color:#FF2929;font-weight: bold;">High</td>
+                        <td style="color:#F58220;font-weight: bold;">Medium</td>
+                        <td style="color:#00AEE6;font-weight: bold;border-right: 1px solid #DCDCDC;">Low</td>
+                        <td style="font-weight: bold;border-right: 1px solid #DCDCDC;">${xcalscanAnalysisAction.getNewIssueCount() == null?"N/A":xcalscanAnalysisAction.getNewIssueCount()}</td>
+                        <td style="font-weight: bold;">${xcalscanAnalysisAction.getFixedIssueCount() == null ?"N/A":xcalscanAnalysisAction.getFixedIssueCount()}</td>
+                    </tr>
+                    <tr style="background: #F6F6F6;text-align: center;" height="32px">
+                        <td colspan="2"> </td>
+                        <td style="font-size: 12px;">Including <span style="font-weight: bold;">${xcalscanAnalysisAction.getDefiniteCount() == null?"0":xcalscanAnalysisAction.getDefiniteCount()}</span> Definites</td>
+                        <td style="color:#FF2929;font-weight: bold;">${xcalscanAnalysisAction.getHighPriorityCount() == null?"0":xcalscanAnalysisAction.getHighPriorityCount()}</td>
+                        <td style="color:#F58220;font-weight: bold;">${xcalscanAnalysisAction.getMediumPriorityCount() == null?"0":xcalscanAnalysisAction.getMediumPriorityCount()}</td>
+                        <td style="color:#00AEE6;font-weight: bold;border-right: 1px solid #DCDCDC;">${xcalscanAnalysisAction.getLowPriorityCount() == null?"0":xcalscanAnalysisAction.getLowPriorityCount()}</td>
+                        <td colspan="2" style="background: #DADADA;color: rgba(0, 0, 0, 0.47);font-weight: bold;">
+                            <span>
+                                <j:choose>
+                                    <j:when test="${hasDsr}">
+                                        <a style="display:table-cell;text-align: center;font-size: 12px;font-weight: bold;color: black;" target="_blank" rel="noopener noreferrer" href="${xcalscanAnalysisAction.getDsrUrl()}">
+                                            View latest DSR
+                                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 10.0484 1.24353 10.3345 1.4545 10.5455C1.66548 10.7565 1.95163 10.875 2.25 10.875H8.25C8.54837 10.875 8.83452 10.7565 9.0455 10.5455C9.25647 10.3345 9.375 10.0484 9.375 9.75V6.75C9.375 6.65054 9.33549 6.55516 9.26517 6.48483C9.19484 6.41451 9.09946 6.375 9 6.375C8.90054 6.375 8.80516 6.41451 8.73483 6.48483C8.66451 6.55516 8.625 6.65054 8.625 6.75V9.75C8.625 9.84946 8.58549 9.94484 8.51517 10.0152C8.44484 10.0855 8.34946 10.125 8.25 10.125H2.25C2.15054 10.125 2.05516 10.0855 1.98484 10.0152C1.91451 9.94484 1.875 9.84946 1.875 9.75V3.75C1.875 3.65054 1.91451 3.55516 1.98484 3.48484C2.05516 3.41451 2.15054 3.375 2.25 3.375H5.25C5.34946 3.375 5.44484 3.33549 5.51516 3.26516C5.58549 3.19484 5.625 3.09946 5.625 3C5.625 2.90054 5.58549 2.80516 5.51516 2.73484C5.44484 2.66451 5.34946 2.625 5.25 2.625H2.25C1.95163 2.625 1.66548 2.74353 1.4545 2.9545C1.24353 3.16548 1.125 3.45163 1.125 3.75V9.75ZM6.375 1.5C6.375 1.40054 6.41451 1.30516 6.48483 1.23483C6.55516 1.16451 6.65054 1.125 6.75 1.125H10.5C10.5995 1.125 10.6948 1.16451 10.7652 1.23483C10.8355 1.30516 10.875 1.40054 10.875 1.5V5.25C10.875 5.34946 10.8355 5.44484 10.7652 5.51516C10.6948 5.58549 10.5995 5.625 10.5 5.625C10.4005 5.625 10.3052 5.58549 10.2348 5.51516C10.1645 5.44484 10.125 5.34946 10.125 5.25V1.875H6.75C6.65054 1.875 6.55516 1.83549 6.48483 1.76516C6.41451 1.69484 6.375 1.59946 6.375 1.5Z" fill="black"/>
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7655 1.23453C10.8004 1.26936 10.8281 1.31075 10.847 1.3563C10.8659 1.40186 10.8757 1.4507 10.8757 1.50003C10.8757 1.54935 10.8659 1.5982 10.847 1.64375C10.8281 1.68931 10.8004 1.7307 10.7655 1.76553L4.76549 7.76553C4.73062 7.8004 4.68923 7.82805 4.64367 7.84692C4.59812 7.86579 4.54929 7.8755 4.49999 7.8755C4.45068 7.8755 4.40185 7.86579 4.3563 7.84692C4.31074 7.82805 4.26935 7.8004 4.23449 7.76553C4.19962 7.73066 4.17196 7.68927 4.15309 7.64372C4.13422 7.59816 4.12451 7.54934 4.12451 7.50003C4.12451 7.45072 4.13422 7.4019 4.15309 7.35634C4.17196 7.31079 4.19962 7.2694 4.23449 7.23453L10.2345 1.23453C10.2693 1.19961 10.3107 1.1719 10.3563 1.153C10.4018 1.13409 10.4507 1.12436 10.5 1.12436C10.5493 1.12436 10.5982 1.13409 10.6437 1.153C10.6893 1.1719 10.7307 1.19961 10.7655 1.23453Z" fill="black"/>
+                                            </svg>
+                                        </a>
+                                    </j:when>
+                                    <j:otherwise>
+                                        DSR not available
+                                    </j:otherwise>
+                                </j:choose>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+                <div style="height:8px"/>
+                <div style="padding-left: 659px;">
+                    <div style="background: #F7323F;border-radius: 2px;width: 166px">
+                        <div style="display:table;height:32px;width:166px;">
+                            <a style="display:table-cell;vertical-align: middle;text-align: center;color: white;font-size: 12px;font-weight: bold;" target="_blank" rel="noopener noreferrer" href="${xcalscanAnalysisAction.getUrl()}">
+                                View latest scan result
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M1.125 9.75C1.125 10.0484 1.24353 10.3345 1.4545 10.5455C1.66548 10.7565 1.95163 10.875 2.25 10.875H8.25C8.54837 10.875 8.83452 10.7565 9.0455 10.5455C9.25647 10.3345 9.375 10.0484 9.375 9.75V6.75C9.375 6.65054 9.33549 6.55516 9.26517 6.48483C9.19484 6.41451 9.09946 6.375 9 6.375C8.90054 6.375 8.80516 6.41451 8.73483 6.48483C8.66451 6.55516 8.625 6.65054 8.625 6.75V9.75C8.625 9.84946 8.58549 9.94484 8.51517 10.0152C8.44484 10.0855 8.34946 10.125 8.25 10.125H2.25C2.15054 10.125 2.05516 10.0855 1.98484 10.0152C1.91451 9.94484 1.875 9.84946 1.875 9.75V3.75C1.875 3.65054 1.91451 3.55516 1.98484 3.48484C2.05516 3.41451 2.15054 3.375 2.25 3.375H5.25C5.34946 3.375 5.44484 3.33549 5.51516 3.26516C5.58549 3.19484 5.625 3.09946 5.625 3C5.625 2.90054 5.58549 2.80516 5.51516 2.73484C5.44484 2.66451 5.34946 2.625 5.25 2.625H2.25C1.95163 2.625 1.66548 2.74353 1.4545 2.9545C1.24353 3.16548 1.125 3.45163 1.125 3.75V9.75ZM6.375 1.5C6.375 1.40054 6.41451 1.30516 6.48483 1.23483C6.55516 1.16451 6.65054 1.125 6.75 1.125H10.5C10.5995 1.125 10.6948 1.16451 10.7652 1.23483C10.8355 1.30516 10.875 1.40054 10.875 1.5V5.25C10.875 5.34946 10.8355 5.44484 10.7652 5.51516C10.6948 5.58549 10.5995 5.625 10.5 5.625C10.4005 5.625 10.3052 5.58549 10.2348 5.51516C10.1645 5.44484 10.125 5.34946 10.125 5.25V1.875H6.75C6.65054 1.875 6.55516 1.83549 6.48483 1.76516C6.41451 1.69484 6.375 1.59946 6.375 1.5Z" fill="white"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M10.7655 1.2345C10.8004 1.26933 10.8281 1.31071 10.847 1.35627C10.8659 1.40183 10.8757 1.45067 10.8757 1.5C10.8757 1.54932 10.8659 1.59817 10.847 1.64372C10.8281 1.68928 10.8004 1.73066 10.7655 1.7655L4.76549 7.7655C4.73062 7.80036 4.68923 7.82802 4.64367 7.84689C4.59812 7.86576 4.54929 7.87547 4.49999 7.87547C4.45068 7.87547 4.40185 7.86576 4.3563 7.84689C4.31074 7.82802 4.26935 7.80036 4.23449 7.7655C4.19962 7.73063 4.17196 7.68924 4.15309 7.64369C4.13422 7.59813 4.12451 7.54931 4.12451 7.5C4.12451 7.45069 4.13422 7.40187 4.15309 7.35631C4.17196 7.31076 4.19962 7.26936 4.23449 7.2345L10.2345 1.2345C10.2693 1.19958 10.3107 1.17187 10.3563 1.15296C10.4018 1.13406 10.4507 1.12433 10.5 1.12433C10.5493 1.12433 10.5982 1.13406 10.6437 1.15296C10.6893 1.17187 10.7307 1.19958 10.7655 1.2345Z" fill="white"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </j:if>
+        </j:forEach>
+    </j:if>
+</j:jelly>

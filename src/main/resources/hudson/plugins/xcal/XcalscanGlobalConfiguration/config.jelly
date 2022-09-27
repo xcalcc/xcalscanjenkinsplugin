@@ -1,0 +1,25 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:f="/lib/form" xmlns:c="/lib/credentials" xmlns:st="jelly:stapler">
+  <f:section title="Xcalscan">
+    <f:entry title="${%XcalscanServers}" description="${%XcalscanServersDesc}">
+      <f:repeatable var="server" items="${instance.scanServers}" add="${%AddXcalServer}">
+      <table width="100%">
+        <f:entry title="${%Name}" field="name">
+          <f:textbox value="${server.name}"/>
+        </f:entry>
+        <f:entry title="${%ServerAddress}" field="serverAddress">
+          <f:textbox default="127.0.0.1" value="${server.serverAddress}"/>
+        </f:entry>
+        <f:entry title="${%Port}" field="port">
+          <f:textbox default="80" value="${server.port}"/>
+        </f:entry>
+          <f:entry title="">
+            <div align="right">
+              <f:repeatableDeleteButton/>
+            </div>
+          </f:entry>
+        </table>
+      </f:repeatable>
+    </f:entry>
+  </f:section>
+</j:jelly>

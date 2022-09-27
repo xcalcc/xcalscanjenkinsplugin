@@ -1,0 +1,6 @@
+<?jelly escape-by-default='true'?>
+<a href="${it.urlName}">
+<img width="16" height="16"
+     title="${it.tooltip}" alt="[xcalscan]"
+     src="${rootURL}/plugin/xcalscan-jenkins/images/xcal_small.png"/>
+</a>
